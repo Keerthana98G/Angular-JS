@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MultipleController</title>
+        <script src="angular.min.js"></script>
+        <script>
+                angular.module('Myapp',[]).
+                service('Loginvalidation',function(){
+                    this.check1=function(x,y){
+                        if(x == "admin" && y == "admin"){
+                            return true;
+                        }else { return false; }
+                    }
+                }).
+                controller('one',function($scope,$rootScope,Loginvalidation){
+                $scope.login=true;
+                //$rootScope.home=false;
+                $scope.login=function(){
+                     var valid=Loginvalidation.check1($scope.Username, $scope.password);
+                alert(valid);}
+                }).controller('two',function($scope,$rootScope,Loginvalidation){
+                    $rootScope.login=function(){
+                      var valid=Loginvalidation.check1($rootScope.Username, $rootScope.password);   
+                      alert(valid);}
+                });
+                </script>
+</head>
+
+<body ng-app="Myapp">
+    
+
+<div ng-controller="one" ng-show="login">
+UserName:<input type="text" ng-model="Username" /><br>
+Password:<input type="password" ng-model="password"/><br>
+<button ng-click="login()" >Enter</button>
+<br>
+</div>
+<div ng-controller="two" ng-show="home">
+ <h1>Hii {{message}},Welcome Back</h1>
+</div>
+
+</body>
+</html>
+
